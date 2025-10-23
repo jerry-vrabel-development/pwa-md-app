@@ -2,12 +2,13 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import mdx from '@mdx-js/rollup';
+import path from 'node:path'
 
 export default defineConfig({
   plugins: [
-    {enforce: 'pre', ...mdx()},
-    react({ include: /\.(jsx|js|mdx|md|tsx|ts)$/ }),
-        VitePWA({
+    mdx({ remarkPlugins: [], rehypePlugins: [] }),
+    react(),
+    VitePWA({
       registerType: 'autoUpdate',
       manifest: {
         name: 'MD‑PWA',
@@ -33,8 +34,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@pages': '/src/pages',
-      '@content': '/src/content/',
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@content': path.resolve(__dirname, 'src/content'),
     },
   },
 });

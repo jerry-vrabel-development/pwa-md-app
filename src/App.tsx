@@ -1,17 +1,18 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import HelloPage from './pages/HelloPage';
+import { BrowserRouter as Router, Navigate, Routes, Route } from 'react-router-dom';
+import Posts from '../src/pages/Posted';
+import MdxPage from '../src/pages/MdxPage';
 import './App.css'
 
 export default function App() {
   return (
     <Router>
-      <nav style={{ padding: '1rem', borderBottom: '1px solid #ddd' }}>
-        <Link to="/">Home</Link>
-      </nav>
-
       <Routes>
-        <Route path="/" element={<HelloPage />} />
-        {/* Add more routes here */}
+        {/* Redirect the root to the posts list */}
+        <Route path="/" element={<Navigate replace to="/posts" />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/posts/:slug" element={<MdxPage />} />
+        {/* Fallback 404 */}
+        <Route path="*" element={<div>Page not found</div>} />
       </Routes>
     </Router>
   );
