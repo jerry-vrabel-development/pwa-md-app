@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+import tailwindcss from '@tailwindcss/vite'
 import mdx from '@mdx-js/rollup';
 import path from 'node:path'
 
@@ -8,6 +9,7 @@ export default defineConfig({
   plugins: [
     mdx({ remarkPlugins: [], rehypePlugins: [] }),
     react(),
+    tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
@@ -34,6 +36,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      "@": path.resolve(__dirname, "./src"),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@content': path.resolve(__dirname, 'src/content'),
     },
