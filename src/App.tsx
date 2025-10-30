@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Navigate, Routes, Route } from 'react-router-dom';
 import Posts from '../src/pages/Posted';
 import MdxPage from '../src/pages/MdxPage';
+import './styles/page-styles.css'
 import './App.css'
 
 export default function App() {

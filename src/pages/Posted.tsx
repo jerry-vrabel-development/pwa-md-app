@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import '../styles/page-styles.css'
 
 const postsMap = import.meta.glob('../content/*.mdx', { eager: true });
 console.log('postsMap:', postsMap);
