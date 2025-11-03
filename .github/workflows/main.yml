@@ -1,0 +1,56 @@
+# Deploy static content to GitHub Pages (configured to publish from main)
+name: Deploy static content to Pages
+
+on:
+  push:
+  branches: [main]           # default‑branch trigger
+  workflow_dispatch:           # manual trigger from Actions tab
+
+# GITHUB_TOKEN must be able to push to the Pages branch (main)
+permissions:
+  contents: write             # required for actions/deploy-pages
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22           # Node 22 is now supported on GitHub runners
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Build step – secrets are injected here
+      - name: Build project
+        run: npm run build
+
+      # Configure GitHub Pages – this reads the repo’s Pages setting (main)
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v4
+
+      # Upload the built artefact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      # Deploy to GitHub Pages (will push to the branch configured in the repo, i.e. main)
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
