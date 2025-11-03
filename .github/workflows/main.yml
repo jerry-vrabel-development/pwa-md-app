@@ -3,7 +3,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-  branches: [main]           # default‑branch trigger
+    branches: [main]           # default‑branch trigger
   workflow_dispatch:           # manual trigger from Actions tab
 
 # GITHUB_TOKEN must be able to push to the Pages branch (main)
