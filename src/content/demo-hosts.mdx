@@ -1,0 +1,266 @@
+Below is a “quick‑start cheat‑sheet” for every place you can spin up a
+**full‑stack demo app** without touching a dollar.
+I’ve split it into the building blocks you’ll need (frontend, backend,
+database, CI/CD) and then listed the free‑tier options that let you stitch
+those together.
+Feel free to copy‑paste the links into a new bookmark folder called
+**Demo‑Hosting‑Free‑Tier**.
+
+---
+
+## 1️⃣  Front‑end (Static / JAMstack)
+
+| Service | Free‑tier limits | Notes | URL | <br />
+|---------|------------------|-------|-----| <br />
+| **Netlify** | 100 GB bandwidth, 100 build minutes, 1 GB storage |
+Serverless functions (15 ms cold‑start, 125 ms runtime) |
+https://netlify.com | <br />
+| **Vercel** | 100 GB bandwidth, 100 build minutes, 100 GB storage |
+Serverless functions  | https://vercel.com <br />
+| **Cloudflare Pages** | Unlimited traffic (on free plan), 1 GB storage |
+Serverless functions via Cloudflare Workers | https://pages.cloudflare.com<br />
+| **Surge** | 10 GB bandwidth, unlimited projects | Simple static hosting,
+no serverless | https://surge.sh<br />
+| **GitHub Pages** | Unlimited traffic | Static only, no serverless |
+https://pages.github.com |
+
+> **Tip** – If you only need a UI for your demo, any of the above will be
+sufficient. For a single‑page app with a small API, add “serverless
+functions” (Netlify Functions, Vercel Edge Functions, Cloudflare Workers).
+
+---
+
+## 2️⃣  Backend (Serverless / Function‑as‑a‑Service)
+
+| Service | Free‑tier limits | Notes | URL |<br />
+|---------|------------------|-------|-----|<br />
+| **Vercel Edge Functions** | 125 ms per request, 100 GB‑month total |
+Built‑in to Vercel; can use same repo as frontend |
+https://vercel.com/docs/functions <br />
+| **Netlify Functions** | 125 ms per request, 100 build minutes | Runs on
+AWS Lambda; cold‑start ~100 ms | https://docs.netlify.com/functions/ <br />
+| **Cloudflare Workers** | 10 k requests/month, 1 GB storage | Unlimited
+traffic for public IP, great for low‑latency |
+https://workers.cloudflare.com <br />
+| **Fly.io** | 512 MB RAM per app, 1 GB outbound, 1 GB disk | Run
+containerized Node/Python/Ruby, free dyno credits | https://fly.io <br />
+| **Render** | 512 MB RAM, 100 GB bandwidth, 100 GB storage | “Web
+services” free tier, auto‑scaling | https://render.com <br />
+| **Railway** | 512 MB RAM, 100 GB bandwidth, 1 GB storage | Simple UI +
+CLI, auto‑scaling | https://railway.app <br />
+| **Glitch** | 512 MB RAM, 200 MB storage | Live editing, instant deploy |
+https://glitch.com <br />
+| **Replit** | 512 MB RAM, 100 GB traffic | “Repl” hosting, free tier for
+public repls | https://replit.com <br />
+| **Firebase Functions** | 125 ms per request, 100 GB‑month | Tight
+integration with Firebase Auth, Firestore |
+https://firebase.google.com/docs/functions |
+
+> **Key** – Pick the one that matches your stack: if you’re comfortable
+with Node, Fly.io/Render/Railway let you spin up a container; if you want
+zero maintenance, Cloudflare Workers or Netlify Functions are great.
+
+---
+
+## 3️⃣  Full‑Stack PaaS (Front + Back + DB)
+
+| Platform | Free‑tier limits | Notes | URL |<br />
+|----------|------------------|-------|-----|<br />
+| **Render** | 512 MB RAM, 100 GB traffic, 100 GB storage, 2 GB disk | One
+click deploy of “Web Service” + “Postgres” | https://render.com <br />
+| **Fly.io** | 512 MB RAM, 1 GB outbound | Run PostgreSQL/PostgresSQL or
+MongoDB via Fly’s “managed services” | https://fly.io <br />
+| **Railway** | 512 MB RAM, 100 GB traffic, 1 GB storage | “PostgreSQL”,
+“MongoDB” in free plan | https://railway.app <br />
+| **Glitch** | 512 MB RAM, 200 MB storage | Auto‑restart on inactivity,
+good for quick demos | https://glitch.com <br />
+| **Render** + **Supabase** (or Firebase) | Render free app + Supabase
+free tier | Combine free Render app with free Supabase database |
+https://supabase.com <br />
+| **Fly.io** + **Supabase** | Fly.io free app + Supabase free tier | Same
+as above, but Fly container can do anything | https://supabase.com <br />
+
+> **Why combine?** The PaaS alone usually gives you a serverless function,
+but not a database. Supabase, Firebase, MongoDB Atlas, or Render’s own
+Postgres give you a DB in the free tier.
+
+---
+
+## 4️⃣  Cloud Provider “Free Tier” (Compute + Storage)
+
+| Provider | Compute free tier | DB free tier | Notes |<br />
+|----------|-------------------|--------------|-------|<br />
+| **AWS** | 750 hrs of t2.micro / t3.micro EC2 (Linux) | 750 hrs of Amazon
+RDS db.t2.micro (MySQL, PostgreSQL) | You must provide your own CI/CD
+(CodeDeploy, etc.) <br />
+| **GCP** | 1 f1-micro instance per month (US regions) | 1 GB Cloud SQL
+(MySQL/PostgreSQL) | Use Cloud Run or App Engine (Standard) <br />
+| **Azure** | 750 hrs B1S VM | 250 GB SQL Database | Use App Service or
+Functions <br />
+| **IBM Cloud** | 1 Core Lite plan | 10 GB Lite | Very small, good for
+prototyping <br />
+
+> **Heads‑up** – The free tier is *strictly* 12‑month credit or monthly
+allocation. You’ll need a credit card to sign up, but you can stay under
+the limit with a tiny instance and a database that stays idle.
+
+---
+
+## 5️⃣  Managed Databases (Free Tiers)
+
+| Database | Free tier | Notes |<br />
+|----------|-----------|-------|<br />
+| **Supabase** | 500 MB Postgres + Auth + Storage | Open‑source Firebase
+alternative <br />
+| **Firebase** | 1 GB Realtime DB, 1 GB Firestore, 50 GB storage | Tight
+Auth, SDKs <br />
+| **MongoDB Atlas** | 512 MB free cluster, 5 GB storage | Cloud‑native
+Mongo <br />
+| **PostgreSQL on Render** | 1 GB disk, 10 MB/s bandwidth | Easy
+integration with Render app <br />
+| **Fly.io managed DB** | 512 MB Postgres | Same as Fly.io compute <br />
+| **Heroku Postgres (Hobby Dev)** | 10 X‑size | Heroku free dyno can’t
+run, but you can use the database for static sites or other services <br />
+
+---
+
+## 6️⃣  Container‑based (Docker / OCI) – Free Tier
+
+| Service | Free tier | Notes |<br />
+|---------|-----------|-------|<br />
+| **Render** | 512 MB RAM, 100 GB bandwidth | “Web Service” can be any
+container <br />
+| **Fly.io** | 512 MB RAM, 1 GB outbound | Perfect for Node, Python, Go,
+Ruby, etc. <br />
+| **Railway** | 512 MB RAM, 100 GB traffic | Docker‑file or built‑in
+service <br />
+| **Replit** | 512 MB RAM, 100 GB traffic | Repls can run Docker
+containers via `replit.nix` <br />
+| **Glitch** | 512 MB RAM, 200 MB storage | “Express” containers via
+`package.json` <br />
+| **GitHub Packages** + **GitHub Actions** | 2 GB storage | Build & push
+images, deploy to free hosts <br />
+
+> **Pro Tip** – If you’re comfortable with Docker, you can ship a tiny
+`docker‑compose.yml` that spins up an app + Postgres, and deploy that to
+Render/Fly.io/Railway for free.
+
+---
+
+## 7️⃣  Expose Local Development (When you don’t want a public domain yet)
+
+| Tool | Free | Notes |<br />
+|------|------|-------|<br />
+| **ngrok** | 1 tunnel, 40 min idle, 20 Mbps | Gives a public URL to a
+local server <br />
+| **localtunnel** | Unlimited | No account needed <br />
+| **Pagekite** | Unlimited | Alternative to ngrok <br />
+| **Cloudflare Tunnel** | Unlimited | Free plan, secure, no credit card <br />
+
+> **Use case** – Great for “demo‑only” projects where you can keep the app
+on your laptop and expose a short‑lived public URL.
+
+---
+
+## 8️⃣  CI/CD / Deployment Automation
+
+| Tool | Free tier | Notes |<br />
+|------|-----------|-------|<br />
+| **GitHub Actions** | 2 M build minutes/month | Push to GitHub →
+auto‑deploy <br />
+| **GitLab CI** | 200 M minutes/month | Same as GitHub, but GitLab repo <br />
+| **Netlify CI** | 1 M build minutes/month | Built‑in with Netlify <br />
+| **Vercel CI** | Unlimited | Auto‑deploy on push <br />
+| **Render CI** | Unlimited | Build & deploy from GitHub <br />
+| **Fly.io CLI** | None (but free infra) | Deploy via CLI <br />
+
+---
+
+## 9️⃣  Quick “Starter Kit” Workflow
+
+1. **Create a GitHub repo** (or GitLab) – name it `demo-app-xyz`.
+2. Add a `package.json` (Node) or `requirements.txt` (Python) for your
+backend.
+3. Add a `README.md` with `npm run dev` instructions.
+4. Add a `src/` folder for your frontend (React, Svelte, Vue, etc.).
+5. Commit and push.
+6. **Choose a host** (e.g., Vercel + Supabase):
+   * Sign up on Vercel → import repo → choose “Node.js” → set env vars.
+   * In Supabase, create a project → note the `SUPABASE_URL` and
+`SUPABASE_ANON_KEY`.
+   * Add those two env vars in Vercel’s dashboard.
+7. Done! Vercel will build both frontend and backend functions, and your
+Supabase DB will be ready.
+
+> **If you want a full container**: Build a Dockerfile that starts both
+your server and a PostgreSQL container. Push to GitHub → Render → Render
+will detect the Dockerfile and spin up a web service.
+
+---
+
+## 🔧  Things to Watch Out For
+
+| Issue | Mitigation |<br />
+|-------|------------|<br />
+| **Free dyno sleeping** (Heroku, Render) | Add a cron or keep a small
+“health” endpoint that is pinged by an uptime monitor. <br />
+| **Billing alerts** | In most services you can set usage alerts (e.g.,
+Fly.io, Render). <br />
+| **Database connections** | Limit connection count; use connection
+pooling. <br />
+| **No persistent storage** | Many serverless functions have no persistent
+disk. Use external DB or Cloudflare KV. <br />
+| **Domain name** | All services give you a `*.vercel.app`,
+`*.netlify.app`, etc. If you want a custom domain, you can add it for free
+on most of these hosts (except maybe Fly.io unless you use a free DNS
+provider). <br />
+| **API rate limits** | Check the per‑minute request limits for serverless
+functions. <br />
+
+---
+
+## 📌 Quick‑Reference Cheat Sheet (links only)
+
+| Category | Platform | URL |<br />
+|----------|----------|-----|<br />
+| Static Frontend | Netlify | https://netlify.com |<br />
+| Static Frontend | Vercel | https://vercel.com |<br />
+| Static Frontend | Cloudflare Pages | https://pages.cloudflare.com |<br />
+| Serverless Backend | Vercel Edge | https://vercel.com |<br />
+| Serverless Backend | Netlify Functions |
+https://docs.netlify.com/functions/ |<br />
+| Serverless Backend | Cloudflare Workers | https://workers.cloudflare.com
+|<br />
+| Serverless Backend | Fly.io | https://fly.io |<br />
+| Serverless Backend | Render | https://render.com |<br />
+| Serverless Backend | Railway | https://railway.app |<br />
+| Full‑Stack PaaS | Render | https://render.com |<br />
+| Full‑Stack PaaS | Fly.io | https://fly.io |<br />
+| Full‑Stack PaaS | Railway | https://railway.app |<br />
+| Free DB | Supabase | https://supabase.com |<br />
+| Free DB | Firebase | https://firebase.google.com |<br />
+| Free DB | MongoDB Atlas | https://www.mongodb.com/cloud/atlas |<br />
+| Cloud Free Tier | AWS | https://aws.amazon.com/free/ |<br />
+| Cloud Free Tier | GCP | https://cloud.google.com/free |<br />
+| Cloud Free Tier | Azure | https://azure.microsoft.com/free/ |<br />
+| Expose Local | ngrok | https://ngrok.com |<br />
+| Expose Local | localtunnel | https://github.com/localtunnel/localtunnel
+|<br />
+| CI/CD | GitHub Actions | https://github.com/features/actions |<br />
+| CI/CD | Vercel | https://vercel.com |<br />
+
+---
+
+## Bottom Line
+
+- **If you want zero maintenance**: Netlify + Netlify Functions or Vercel
++ Vercel Functions + Supabase – all free and instant.
+- **If you need a container or custom runtime**: Fly.io, Render, or
+Railway – all have a 512 MB RAM free tier and a free PostgreSQL or MongoDB
+option.
+- **If you want to stay in one ecosystem**: Supabase + Render or Supabase
++ Fly.io gives you a full stack (API + DB) with minimal configuration.
+
+Pick the stack that matches the tech you’re most comfortable with, and
+you’ll be up and demo‑ready in minutes without paying a dime. Happy
+hacking!

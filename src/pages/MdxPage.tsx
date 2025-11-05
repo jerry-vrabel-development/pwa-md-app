@@ -13,8 +13,8 @@ export default function MdxPage() {
     key.includes(`${slug}.mdx`)
   );
 
-  const Module = moduleKey ? (modules[moduleKey] as any).default : null;
-  const frontmatter = moduleKey ? (modules[moduleKey] as any).frontmatter : null;
+  const Module = moduleKey ? modules[moduleKey].default : null;
+  const frontmatter = moduleKey ? modules[moduleKey].frontmatter : null;
   const title = frontmatter?.title || slug || 'Post';
 
 return (
